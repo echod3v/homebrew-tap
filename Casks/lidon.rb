@@ -1,6 +1,6 @@
 cask "lidon" do
-  version "1.0.2"
-  sha256 "331a7c3f779e6245f04996315199beee3b8f094aa210141e72ffe40f45c48b3a"
+  version "1.0.3"
+  sha256 "67d9c95cba4cd4542b9e90d6b46ad8a00cda56242c1260e5ae5d9774fa515896"
 
   url "https://github.com/jayden0903/LidOn/releases/download/v#{version}/LidOn-#{version}.zip"
   name "LidOn"
