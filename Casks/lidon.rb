@@ -1,6 +1,6 @@
 cask "lidon" do
-  version "1.0.3"
-  sha256 "67d9c95cba4cd4542b9e90d6b46ad8a00cda56242c1260e5ae5d9774fa515896"
+  version "1.0.4"
+  sha256 "d3c459d2d480ef727f8489b1b8916e0bd3bcab979a75eb16607430ef5217848d"
 
   url "https://github.com/jayden0903/LidOn/releases/download/v#{version}/LidOn-#{version}.zip"
   name "LidOn"
@@ -15,6 +15,12 @@ cask "lidon" do
   # Free, unsigned app: remove the Gatekeeper quarantine attribute
   postflight do
     system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/LidOn.app"]
+    # An upgrade quits LidOn. If it was running a moment ago, start it again so it can pick up where it left off
+    # (a Mac running with the lid closed would otherwise go to sleep).
+    state = File.expand_path("~/Library/Application Support/LidOn/state.json")
+    if File.exist?(state) && Time.now - File.mtime(state) < 120
+      system_command "/usr/bin/open", args: ["-g", "#{appdir}/LidOn.app"]
+    end
   end
 
   uninstall quit: "dev.lidon.LidOn"
