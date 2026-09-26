@@ -7,7 +7,7 @@ cask "lidon" do
   desc "Keep your MacBook and coding agents running with the lid closed"
   homepage "https://github.com/echod3v/LidOn"
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "LidOn.app"
   binary "#{appdir}/LidOn.app/Contents/Helpers/lidon"
