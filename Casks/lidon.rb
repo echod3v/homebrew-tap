@@ -1,6 +1,6 @@
 cask "lidon" do
-  version "1.0.9"
-  sha256 "be464363ce08bc4ba41499a5c755a028aa1b5e2fd3c0988a9744a1df2ac1b676"
+  version "1.0.10"
+  sha256 "e0c9f253b44bb5a102645aa5d3d72b59afff0ac70d2ce68c7c08bcb4e7c3aa1b"
 
   url "https://github.com/jayden0903/LidOn/releases/download/v#{version}/LidOn-#{version}.zip"
   name "LidOn"
@@ -30,8 +30,18 @@ cask "lidon" do
     end
   end
 
-  uninstall quit:   "dev.lidon.LidOn",
-            delete: "/etc/sudoers.d/lidon"
+  uninstall quit: "dev.lidon.LidOn"
+
+  # Remove the one-time setup rule when LidOn is uninstalled — but not during upgrade/reinstall,
+  # which also run this step (the new version would otherwise ask for the password again).
+  uninstall_postflight do
+    next if caller.any? { |line| line.match?(%r{/cask/(upgrade|reinstall)\.rb}) }
+    next unless File.exist?("/etc/sudoers.d/lidon")
+
+    system_command "/bin/sh",
+                   args: ["-c", "/usr/bin/pmset -a disablesleep 0; /bin/rm -f /etc/sudoers.d/lidon"],
+                   sudo: true
+  end
 
   zap trash: [
     "~/Library/Application Support/LidOn",
