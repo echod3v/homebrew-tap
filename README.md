@@ -1,11 +1,11 @@
-# echod3v/homebrew-tap
+# jayden0903/homebrew-tap
 
-Homebrew casks by [echod3v](https://github.com/echod3v).
+Homebrew casks by [jayden0903](https://github.com/jayden0903).
 
 ```bash
-brew install --cask echod3v/tap/lidon
+brew install --cask jayden0903/tap/lidon
 ```
 
 | Cask | Description |
 |---|---|
-| [lidon](Casks/lidon.rb) | [LidOn](https://github.com/echod3v/LidOn) — keep your MacBook and AI coding agents running with the lid closed. Also installs the `lidon` command. |
+| [lidon](Casks/lidon.rb) | [LidOn](https://github.com/jayden0903/LidOn) — keep your MacBook and AI coding agents running with the lid closed. Also installs the `lidon` command. |
